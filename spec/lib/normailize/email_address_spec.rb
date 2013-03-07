@@ -13,7 +13,15 @@ describe Normailize::EmailAddress do
     context 'when email address is not valid' do
       it 'raises an exception' do
         expect do
-          Normailize::EmailAddress.new('not an email address')
+          Normailize::EmailAddress.new('not an @email address. sorry!')
+        end.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'when email address is technically valid, but we do not accept it' do
+      it 'raises an exception' do
+        expect do
+          Normailize::EmailAddress.new('" fairly.@.unusual.example.com"(&a_comment_making_it_extralong!)@[IPv6:2001:db8:23:::42]')
         end.to raise_error(ArgumentError)
       end
     end
@@ -81,7 +89,7 @@ describe Normailize::EmailAddress do
           'JoHn@live.com'            => 'jOhN@live.com',
           'john+lol@live.com'        => 'john+wtf@live.com',
           'John+lol+wtf@live.com'    => 'jOhn+lol@live.com',
-          'john@hotmail.com'         => 'john@hotmail.com',
+          'john@hotmail.com'         => 'john@hotmail.com'
         }
 
         emails.each_pair do |e1, e2|
