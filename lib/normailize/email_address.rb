@@ -18,7 +18,14 @@ module Normailize
     attr_reader :address, :username, :domain
 
     # Private: Simple regex to validate format of an email address
-    EMAIL_ADDRESS_REGEX = /\A.+\@.+\..+\z/
+    #
+    # We're deliberately ignoring a whole range of special and restricted chars
+    # for the sake of simplicity. This should match 99.99% of all the email
+    # addresses out there. If you allow comments (parentheses enclosed) in the
+    # local or domain part of your email addresses, make sure to strip them for
+    # normalization purposes. For '@' in the local part to be allowed, split
+    # local and domain part at the _last_ occurrence of the @-symbol.
+    EMAIL_ADDRESS_REGEX = /\A([a-z0-9_\-][a-z0-9_\-\+\.]{,62})?[a-z0-9_\-]@(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)+[a-z]{2,}\z/i
 
     # Public: Class initializer
     #
