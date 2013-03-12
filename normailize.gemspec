@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["michenriksen87@gmail.com"]
   spec.description   = %q{Normalize emails like J.oh.n+sneaky@gmail.com into john@gmail.com}
   spec.summary       = %q{Normalize emails like J.oh.n+sneaky@gmail.com into john@gmail.com}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/soundcloud/normailize"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
