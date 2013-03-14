@@ -16,7 +16,9 @@ If an email is given that is not from any of the known providers, it will not do
 
 Add this line to your application's Gemfile:
 
-    gem 'normailize'
+```ruby
+gem 'normailize'
+```
 
 And then execute:
 
@@ -32,33 +34,37 @@ Or install it yourself as:
 
 The core of the gem is the `Normailize::EmailAddress#same_as?` which can compare two email addresses and returns true if they normalize into the same address:
 
-    # Lets compare two Gmail addresses:
-    
-    address1 = Normailize::EmailAddress.new('Jo.Hn+sneaky@gmail.com')
-    address2 = Normailize::EmailAddress.new('j.o.h.n+again@googlemail.com')
+```ruby
+# Lets compare two Gmail addresses:
 
-    address1.same_as?(address2) # => True, they both normalize to john and gmail.com and googlemail.com are domains for the same provider
+address1 = Normailize::EmailAddress.new('Jo.Hn+sneaky@gmail.com')
+address2 = Normailize::EmailAddress.new('j.o.h.n+again@googlemail.com')
 
-    # Now we compare two live.com addresses:
+address1.same_as?(address2) # => True, they both normalize to john and gmail.com and googlemail.com are domains for the same provider
 
-    address1 = Normailize::EmailAddress.new('john@live.com')
-    address2 = Normailize::EmailAddress.new('john+sneaky@live.com')
+# Now we compare two live.com addresses:
 
-    address1.same_as?(address2) # => True, they both normalize to john@live.com
+address1 = Normailize::EmailAddress.new('john@live.com')
+address2 = Normailize::EmailAddress.new('john+sneaky@live.com')
 
-    # These are not the same addresses:
+address1.same_as?(address2) # => True, they both normalize to john@live.com
 
-    address1 = Normailize::EmailAddress.new('john@somewhere.com')
-    address2 = Normailize::EmailAddress.new('john@somewhereelse.com')
+# These are not the same addresses:
 
-    address1.same_as?(address2) # => False, they are not the same addresses
+address1 = Normailize::EmailAddress.new('john@somewhere.com')
+address2 = Normailize::EmailAddress.new('john@somewhereelse.com')
+
+address1.same_as?(address2) # => False, they are not the same addresses
+```
 
 ### Getting the normalized email address
 
 If you want to get the normalized email address, you can call the `Normailize::EmailAddress#normalized_address` method:
 
-    address = Normailize::EmailAddress.new('J.oh.N+sNeaky@gmail.com')
-    address.normalized_address # => john@gmail.com
+```ruby
+address = Normailize::EmailAddress.new('J.oh.N+sNeaky@gmail.com')
+address.normalized_address # => john@gmail.com
+```
 
 ### Adding a new provider
 
@@ -68,23 +74,25 @@ If you want to normalize addresses from providers that are not already covered, 
 
 The following is a basic provider for somewhere.com:
 
-    module Normailize
-      module Provider
-        class Somewhere
-          include Normailize::Provider
+```ruby
+module Normailize
+  module Provider
+    class Somewhere
+      include Normailize::Provider
 
-          # Specify one or more domains for somewhere.com
-          set_domains 'somewhere.com'
+      # Specify one or more domains for somewhere.com
+      set_domains 'somewhere.com'
 
-          # Specify modificiations to be done on the username part of the email.
-          # The following modificiations are currently supported:
-          #   - :lowercase          Lowercases the username
-          #   - :remove_dots        Removes all dots
-          #   - :remove_plus_part   Removes everything after the first occurrence of a plus sign
-          set_modifications :lowercase, :remove_plus_part
-        end
-      end
+      # Specify modificiations to be done on the username part of the email.
+      # The following modificiations are currently supported:
+      #   - :lowercase          Lowercases the username
+      #   - :remove_dots        Removes all dots
+      #   - :remove_plus_part   Removes everything after the first occurrence of a plus sign
+      set_modifications :lowercase, :remove_plus_part
     end
+  end
+end
+```
 
 Adapt the Somewhere provider to fit the new provider and save it in the `lib/normailize/providers` directory
 
