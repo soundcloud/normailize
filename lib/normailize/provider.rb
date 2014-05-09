@@ -14,13 +14,14 @@ module Normailize
       when *Gmail.domains   then Gmail.new(domain)
       when *Live.domains    then Live.new(domain)
       when *Hotmail.domains then Hotmail.new(domain)
+      when *Yandex.domains then Yandex.new(domain)
       else Generic.new(domain)
       end
     end
 
     def self.included(base)
       class << base; attr_accessor :domains, :modifications end
-      base.extend(ClassMethods)    
+      base.extend(ClassMethods)
     end
 
     module ClassMethods

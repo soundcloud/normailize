@@ -5,6 +5,7 @@ require "normailize/provider/generic"
 require "normailize/provider/gmail"
 require "normailize/provider/live"
 require "normailize/provider/hotmail"
+require "normailize/provider/yandex"
 
 module Normailize
   # Your code goes here...
