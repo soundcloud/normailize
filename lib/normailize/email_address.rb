@@ -60,6 +60,13 @@ module Normailize
       @username.downcase!
     end
 
+    # Internal: Replace all dashes with dots in username parts
+    #
+    # Returns nothing
+    def replace_dashes_with_dots
+      @username.gsub!('-', '.')
+    end
+
     # Internal: Get provider instance for email address
     #
     # If provider is known, it returns a specific provider instance,
