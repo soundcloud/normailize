@@ -35,7 +35,13 @@ describe Normailize::EmailAddress do
         'scrapeboxautoa.pp.r..ovelist+427727@gmail.com'     => 'scrapeboxautoapprovelist@gmail.com',
         'o.b.r.a.c.h.t.p.r.d.z.y.n.s.k.i+22@gmail.com'      => 'obrachtprdzynski@gmail.com',
         'z+o.e+j+ayl.e+em+a+r.t+i.n+d3u76n@gmail.com'       => 'z@gmail.com',
-        'sneakydude+lol@live.com'                           => 'sneakydude@live.com'
+        'sneakydude+lol@live.com'                           => 'sneakydude@live.com',
+        'JohnDoe@yandex.com'                                => 'johndoe@yandex.com',
+        'john-doe+russia@yandex.ru'                         => 'john.doe@yandex.ru',
+        'john-doe+commercial@yandex.com'                    => 'john.doe@yandex.com',
+        'john-doe+kz@yandex.kz'                             => 'john.doe@yandex.kz',
+        'john-doe+by@yandex.by'                             => 'john.doe@yandex.by',
+        'john-doe@ya.ru'                                    => 'john.doe@ya.ru',
       }
 
       emails.each_pair do |sneaky, expected_normalization|
@@ -69,6 +75,14 @@ describe Normailize::EmailAddress do
       end
     end
 
+    %w(yandex.ru yandex.com yandex.ua yandex.kz yandex.by ya.ru).each do |domain|
+      context "when address is a #{domain}" do
+        it 'returns instance of Yandex provider' do
+          Normailize::EmailAddress.new("john@#{domain}").provider.should be_a(Normailize::Provider::Yandex)
+        end
+      end
+    end
+
     context 'when address is an unknown provider' do
       it 'returns instance of Generic provider' do
         Normailize::EmailAddress.new('john@somewhere.com').provider.should be_a(Normailize::Provider::Generic)
@@ -77,7 +91,7 @@ describe Normailize::EmailAddress do
   end
 
   describe '#same_as?' do
-    context 'when emails are the same' do 
+    context 'when emails are the same' do
       it 'returns true' do
         emails = {
           'john@gmail.com'           => 'john@gmail.com',
@@ -89,7 +103,12 @@ describe Normailize::EmailAddress do
           'JoHn@live.com'            => 'jOhN@live.com',
           'john+lol@live.com'        => 'john+wtf@live.com',
           'John+lol+wtf@live.com'    => 'jOhn+lol@live.com',
-          'john@hotmail.com'         => 'john@hotmail.com'
+          'john@hotmail.com'         => 'john@hotmail.com',
+          'john@yandex.com'          => 'john@yandex.ru',
+          'john@yandex.kz'           => 'john@yandex.ru',
+          'john@yandex.by'           => 'john@yandex.ru',
+          'john@yandex.ru'           => 'john@yandex.ru',
+          'john@ya.ru'               => 'john@yandex.ru',
         }
 
         emails.each_pair do |e1, e2|
