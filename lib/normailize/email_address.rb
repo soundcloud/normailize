@@ -25,7 +25,7 @@ module Normailize
     # local or domain part of your email addresses, make sure to strip them for
     # normalization purposes. For '@' in the local part to be allowed, split
     # local and domain part at the _last_ occurrence of the @-symbol.
-    EMAIL_ADDRESS_REGEX = /\A([a-z0-9_\-][a-z0-9_\-\+\.]{,62})?[a-z0-9_\-]@(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)+[a-z]{2,}\z/i
+    EMAIL_ADDRESS_REGEX = /\A([a-z0-9_\-][a-z0-9_\-\+\.]{,62})?[a-z0-9_\-\+]@(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)+[a-z]{2,}\z/i
 
     # Public: Class initializer
     #
