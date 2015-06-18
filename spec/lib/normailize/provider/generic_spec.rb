@@ -22,8 +22,12 @@ describe Normailize::Provider::Generic do
   describe '#modifications' do
     subject { Normailize::Provider::Generic.new('somewhere.com').modifications }
 
-    it 'does not contain any modifications' do
-      subject.should be_empty
+    it 'lowercases emails' do
+      subject.should include(:lowercase)
+    end
+
+    it 'removes plus parts' do
+      subject.should include(:remove_plus_part)
     end
   end
 

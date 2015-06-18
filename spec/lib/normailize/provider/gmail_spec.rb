@@ -51,11 +51,5 @@ describe Normailize::Provider::Gmail do
         subject.same_as?(Normailize::Provider::Generic.new('somewhere.com')).should be_false
       end
     end
-
-    context 'when comparing a Hotmail provider' do
-      it 'returns false' do
-        subject.same_as?(Normailize::Provider::Hotmail.new('hotmail.com')).should be_false
-      end
-    end
   end
 end

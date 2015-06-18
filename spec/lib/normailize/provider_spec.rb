@@ -14,18 +14,6 @@ describe Normailize::Provider do
       end
     end
 
-    context 'when given live.com as domain' do
-      it 'returns the Live provider' do
-        Normailize::Provider.factory('live.com').should be_a(Normailize::Provider::Live)
-      end
-    end
-
-    context 'when given hotmail.com as domain' do
-      it 'returns the Hotmail provider' do
-        Normailize::Provider.factory('hotmail.com').should be_a(Normailize::Provider::Hotmail)
-      end
-    end
-
     context 'when given an unknown domain' do
       it 'returns instance of Generic provider' do
         Normailize::Provider.factory('somewhere.com').should be_a(Normailize::Provider::Generic)

@@ -57,18 +57,6 @@ describe Normailize::EmailAddress do
       end
     end
 
-    context 'when address is a @live.com' do
-      it 'returns instance of Live provider' do
-        Normailize::EmailAddress.new('john@live.com').provider.should be_a(Normailize::Provider::Live)
-      end
-    end
-
-    context 'when address is a @hotmail.com' do
-      it 'returns instance of Hotmail provider' do
-        Normailize::EmailAddress.new('john@hotmail.com').provider.should be_a(Normailize::Provider::Hotmail)
-      end
-    end
-
     context 'when address is an unknown provider' do
       it 'returns instance of Generic provider' do
         Normailize::EmailAddress.new('john@somewhere.com').provider.should be_a(Normailize::Provider::Generic)

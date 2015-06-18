@@ -12,8 +12,6 @@ module Normailize
     def self.factory(domain)
       case domain
       when *Gmail.domains   then Gmail.new(domain)
-      when *Live.domains    then Live.new(domain)
-      when *Hotmail.domains then Hotmail.new(domain)
       else Generic.new(domain)
       end
     end
