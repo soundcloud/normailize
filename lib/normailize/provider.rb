@@ -12,6 +12,7 @@ module Normailize
     def self.factory(domain)
       case domain
       when *Gmail.domains   then Gmail.new(domain)
+      when *Yahoo.domains   then Yahoo.new(domain)
       else Generic.new(domain)
       end
     end

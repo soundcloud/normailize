@@ -35,7 +35,8 @@ describe Normailize::EmailAddress do
         'scrapeboxautoa.pp.r..ovelist+427727@gmail.com'     => 'scrapeboxautoapprovelist@gmail.com',
         'o.b.r.a.c.h.t.p.r.d.z.y.n.s.k.i+22@gmail.com'      => 'obrachtprdzynski@gmail.com',
         'z+o.e+j+ayl.e+em+a+r.t+i.n+d3u76n@gmail.com'       => 'z@gmail.com',
-        'sneakydude+lol@live.com'                           => 'sneakydude@live.com'
+        'sneakydude+lol@live.com'                           => 'sneakydude@live.com',
+        'alias-001@yahoo.com'                               => 'alias@yahoo.com',
       }
 
       emails.each_pair do |sneaky, expected_normalization|
@@ -54,6 +55,18 @@ describe Normailize::EmailAddress do
     context 'when address is a @googlemail.com' do
       it 'returns instance of Gmail provider' do
         Normailize::EmailAddress.new('john@googlemail.com').provider.should be_a(Normailize::Provider::Gmail)
+      end
+    end
+
+    context 'when address is a @yahoo.com' do
+      it 'returns instance of Yahoo provider' do
+        Normailize::EmailAddress.new('john@yahoo.com').provider.should be_a(Normailize::Provider::Yahoo)
+      end
+    end
+
+    context 'when address is a @yahoo.co.id' do
+      it 'returns instance of Yahoo provider' do
+        Normailize::EmailAddress.new('john@yahoo.co.id').provider.should be_a(Normailize::Provider::Yahoo)
       end
     end
 
@@ -77,7 +90,8 @@ describe Normailize::EmailAddress do
           'JoHn@live.com'            => 'jOhN@live.com',
           'john+lol@live.com'        => 'john+wtf@live.com',
           'John+lol+wtf@live.com'    => 'jOhn+lol@live.com',
-          'john@hotmail.com'         => 'john@hotmail.com'
+          'john@hotmail.com'         => 'john@hotmail.com',
+          'john-john@yahoo.com'      => 'john-wtf@yahoo.com',
         }
 
         emails.each_pair do |e1, e2|

@@ -53,6 +53,13 @@ module Normailize
       @username = @username.split('+', 2).first
     end
 
+    # Internal: Removes everything after the first occurence of a dash sign in the username parts
+    #
+    # Returns nothing
+    def remove_dash_part
+      @username = @username.split('-', 2).first
+    end
+
     # Internal: Lowercase characthers in username part
     #
     # Returns nothing
