@@ -1,5 +1,7 @@
 # Normailize
 
+> **Important notice**: We decided to discontinue support for this project; SoundCloud will no longer accept pull requests or publish new releases. If you're using normailize in one of your projects, we suggest you fork the project in order to perform any necessary maintenance.
+
 Normailize is a gem to normalize email addresses from something like `Jo.Hn+sneaky@gmail.com` to `john@gmail.com`. This can be used in applications to prevent
 spammers and other shady types from signing up multiple times with variations of the same email address by adding dots, mixing the case or adding a plus sign
 followed by an arbitrary string.
